@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:tasks/core/constants/app_constants.dart';
 
 class AddActionButton extends StatelessWidget {
   final VoidCallback? onPressed;
@@ -8,23 +9,27 @@ class AddActionButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      decoration: BoxDecoration(
+      decoration: const BoxDecoration(
         boxShadow: [
           BoxShadow(
-            color: Colors.black26,
+            color: AppColors.shadowColor,
             spreadRadius: 2,
             blurRadius: 7,
             offset: Offset(-2, 4),
           ),
         ],
         shape: BoxShape.circle,
-        color: Colors.red,
+        color: AppColors.primaryRed,
       ),
       child: Padding(
-        padding: EdgeInsets.all(12),
+        padding: const EdgeInsets.all(AppSpacing.sm),
         child: GestureDetector(
           onTap: onPressed,
-          child: Icon(Icons.add, color: Colors.white, size: 24),
+          child: const Icon(
+            Icons.add,
+            color: Colors.white,
+            size: AppIconSizes.small,
+          ),
         ),
       ),
     );

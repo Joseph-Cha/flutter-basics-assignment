@@ -1,12 +1,14 @@
 import 'package:flutter/material.dart';
-import 'package:tasks/components/add_action_button.dart';
-import 'package:tasks/components/add_task_bottom_sheet.dart';
-import 'package:tasks/components/empty_task_view.dart';
-import 'package:tasks/components/todo_view.dart';
-import 'package:tasks/models/to_do_entity.dart';
+import 'package:tasks/core/constants/app_constants.dart';
+import 'package:tasks/widgets/common/add_action_button.dart';
+import 'package:tasks/widgets/todo/add_task_bottom_sheet.dart';
+import 'package:tasks/widgets/common/empty_task_view.dart';
+import 'package:tasks/widgets/todo/todo_view.dart';
+import 'package:tasks/models/todo_entity.dart';
 
 class HomePage extends StatefulWidget {
   final String ownerName;
+
   const HomePage({super.key, required this.ownerName});
 
   @override
@@ -14,52 +16,74 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  List<TodoView> todoViews = [];
+  final List<TodoEntity> _todos = [];
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.grey.shade300,
+      backgroundColor: AppColors.backgroundColor,
       resizeToAvoidBottomInset: false,
       appBar: AppBar(
-        backgroundColor: Colors.white,
+        backgroundColor: AppColors.appBarBackground,
         title: Text(
           "${widget.ownerName}'s Tasks",
-          style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+          style: const TextStyle(
+            fontSize: AppFontSizes.large,
+            fontWeight: FontWeight.bold,
+          ),
         ),
       ),
       body: SafeArea(
         child: Padding(
-          padding: EdgeInsets.all(20),
-          child: todoViews.isEmpty
-              ? EmptyTaskView(widget: widget, onAddTodo: addTodoView)
-              : ListView(children: todoViews),
+          padding: const EdgeInsets.all(AppSpacing.lg),
+          child: _todos.isEmpty
+              ? EmptyTaskView(ownerName: widget.ownerName)
+              : ListView.builder(
+                  itemCount: _todos.length,
+                  itemBuilder: (context, index) {
+                    return TodoView(
+                      todoEntity: _todos[index],
+                      onToggleDone: () => _toggleTodoDone(index),
+                      onToggleFavorite: () => _toggleTodoFavorite(index),
+                    );
+                  },
+                ),
         ),
       ),
       floatingActionButton: AddActionButton(
-        onPressed: () => _showAddTaskBottomSheet(context),
+        onPressed: _showAddTaskBottomSheet,
       ),
     );
   }
 
-  void addTodoView(ToDoEntity todoEntity) {
+  void _addTodo(TodoEntity todo) {
     setState(() {
-      todoViews.add(
-        TodoView(toDoEntity: todoEntity, onToggleFavortie: onFavoriteToggle),
+      _todos.add(todo);
+    });
+  }
+
+  void _toggleTodoDone(int index) {
+    setState(() {
+      _todos[index] = _todos[index].copyWith(
+        isDone: !_todos[index].isDone,
       );
     });
   }
 
-  void _showAddTaskBottomSheet(BuildContext context) {
+  void _toggleTodoFavorite(int index) {
+    setState(() {
+      _todos[index] = _todos[index].copyWith(
+        isFavorite: !_todos[index].isFavorite,
+      );
+    });
+  }
+
+  void _showAddTaskBottomSheet() {
     showModalBottomSheet(
       context: context,
       isScrollControlled: true,
       backgroundColor: Colors.transparent,
-      builder: (context) => AddTaskBottomSheet(onAddTodo: addTodoView),
+      builder: (context) => AddTaskBottomSheet(onAddTodo: _addTodo),
     );
-  }
-
-  void onFavoriteToggle() {
-    setState(() {});
   }
 }
