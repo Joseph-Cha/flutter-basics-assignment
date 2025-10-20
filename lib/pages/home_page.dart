@@ -21,22 +21,22 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: AppColors.background,
+      backgroundColor: AppColors.background(context),
       appBar: AppBar(
-        backgroundColor: AppColors.surface,
+        backgroundColor: AppColors.surface(context),
         elevation: 0,
         title: Text(
           "${widget.ownerName}'s Tasks",
-          style: const TextStyle(
+          style: TextStyle(
             fontSize: AppFontSizes.xLarge,
             fontWeight: FontWeight.bold,
-            color: AppColors.textPrimary,
+            color: AppColors.textPrimary(context),
           ),
         ),
         bottom: PreferredSize(
           preferredSize: const Size.fromHeight(1),
           child: Container(
-            color: AppColors.borderLight,
+            color: AppColors.borderLight(context),
             height: 1,
           ),
         ),

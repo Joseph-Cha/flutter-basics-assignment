@@ -25,15 +25,15 @@ class TodoView extends StatelessWidget {
       child: Container(
         margin: const EdgeInsets.only(bottom: AppSpacing.md),
         decoration: BoxDecoration(
-          color: isFavorite ? AppColors.favoriteBackground : AppColors.surface,
+          color: isFavorite ? AppColors.favoriteBackground(context) : AppColors.surface(context),
           borderRadius: BorderRadius.circular(AppBorderRadius.md),
           border: Border.all(
-            color: isFavorite ? AppColors.favoriteBorder : AppColors.borderLight,
+            color: isFavorite ? AppColors.favoriteBorder(context) : AppColors.borderLight(context),
             width: 1.5,
           ),
           boxShadow: [
             BoxShadow(
-              color: AppColors.shadow,
+              color: AppColors.shadow(context),
               blurRadius: 4,
               offset: const Offset(0, 2),
             ),
@@ -61,10 +61,10 @@ class TodoView extends StatelessWidget {
                       decoration: BoxDecoration(
                         shape: BoxShape.circle,
                         border: Border.all(
-                          color: isDone ? AppColors.success : AppColors.border,
+                          color: isDone ? AppColors.success(context) : AppColors.border(context),
                           width: 2,
                         ),
-                        color: isDone ? AppColors.success : Colors.transparent,
+                        color: isDone ? AppColors.success(context) : Colors.transparent,
                       ),
                       child: isDone
                           ? const Icon(
@@ -85,12 +85,12 @@ class TodoView extends StatelessWidget {
                         fontSize: AppFontSizes.medium,
                         fontWeight: FontWeight.w500,
                         color: isDone
-                            ? AppColors.textTertiary
-                            : AppColors.textPrimary,
+                            ? AppColors.textTertiary(context)
+                            : AppColors.textPrimary(context),
                         decoration: isDone
                             ? TextDecoration.lineThrough
                             : TextDecoration.none,
-                        decorationColor: AppColors.textTertiary,
+                        decorationColor: AppColors.textTertiary(context),
                         decorationThickness: 2,
                       ),
                     ),
@@ -107,8 +107,8 @@ class TodoView extends StatelessWidget {
                         isFavorite ? Icons.star_rounded : Icons.star_outline_rounded,
                         size: AppIconSizes.medium,
                         color: isFavorite
-                            ? AppColors.starYellow
-                            : AppColors.iconInactive,
+                            ? AppColors.starYellow(context)
+                            : AppColors.iconInactive(context),
                       ),
                     ),
                   ),

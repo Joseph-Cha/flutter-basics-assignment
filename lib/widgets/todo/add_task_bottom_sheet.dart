@@ -47,17 +47,17 @@ class _AddTaskBottomSheetState extends State<AddTaskBottomSheet> {
         bottom: MediaQuery.of(context).viewInsets.bottom,
       ),
       child: Container(
-        decoration: const BoxDecoration(
-          color: AppColors.surface,
-          borderRadius: BorderRadius.only(
+        decoration: BoxDecoration(
+          color: AppColors.surface(context),
+          borderRadius: const BorderRadius.only(
             topLeft: Radius.circular(AppBorderRadius.xl),
             topRight: Radius.circular(AppBorderRadius.xl),
           ),
           boxShadow: [
             BoxShadow(
-              color: AppColors.shadowDark,
+              color: AppColors.shadowDark(context),
               blurRadius: 10,
-              offset: Offset(0, -2),
+              offset: const Offset(0, -2),
             ),
           ],
         ),
@@ -70,7 +70,7 @@ class _AddTaskBottomSheetState extends State<AddTaskBottomSheet> {
               width: 40,
               height: 4,
               decoration: BoxDecoration(
-                color: AppColors.border,
+                color: AppColors.border(context),
                 borderRadius: BorderRadius.circular(AppBorderRadius.sm),
               ),
             ),
@@ -85,19 +85,19 @@ class _AddTaskBottomSheetState extends State<AddTaskBottomSheet> {
               ),
               child: Row(
                 children: [
-                  const Text(
+                  Text(
                     '새로운 할 일',
                     style: TextStyle(
                       fontSize: AppFontSizes.large,
                       fontWeight: FontWeight.bold,
-                      color: AppColors.textPrimary,
+                      color: AppColors.textPrimary(context),
                     ),
                   ),
                   const Spacer(),
                   IconButton(
                     onPressed: () => Navigator.pop(context),
                     icon: const Icon(Icons.close_rounded),
-                    color: AppColors.iconInactive,
+                    color: AppColors.iconInactive(context),
                     padding: EdgeInsets.zero,
                     constraints: const BoxConstraints(),
                   ),
@@ -105,7 +105,7 @@ class _AddTaskBottomSheetState extends State<AddTaskBottomSheet> {
               ),
             ),
 
-            const Divider(height: 1, color: AppColors.borderLight),
+            Divider(height: 1, color: AppColors.borderLight(context)),
 
             // Content
             Padding(
@@ -124,10 +124,10 @@ class _AddTaskBottomSheetState extends State<AddTaskBottomSheet> {
                       hintText: '할 일 제목',
                       hintStyle: TextStyle(
                         fontSize: AppFontSizes.medium,
-                        color: AppColors.textDisabled,
+                        color: AppColors.textDisabled(context),
                       ),
                       filled: true,
-                      fillColor: AppColors.surfaceVariant,
+                      fillColor: AppColors.surfaceVariant(context),
                       border: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(AppBorderRadius.md),
                         borderSide: BorderSide.none,
@@ -138,7 +138,7 @@ class _AddTaskBottomSheetState extends State<AddTaskBottomSheet> {
                       ),
                       prefixIcon: Icon(
                         Icons.check_circle_outline_rounded,
-                        color: AppColors.iconInactive,
+                        color: AppColors.iconInactive(context),
                         size: AppIconSizes.medium,
                       ),
                     ),
@@ -167,10 +167,10 @@ class _AddTaskBottomSheetState extends State<AddTaskBottomSheet> {
                         hintText: '세부 정보 추가 (선택사항)',
                         hintStyle: TextStyle(
                           fontSize: AppFontSizes.small,
-                          color: AppColors.textDisabled,
+                          color: AppColors.textDisabled(context),
                         ),
                         filled: true,
-                        fillColor: AppColors.surfaceVariant,
+                        fillColor: AppColors.surfaceVariant(context),
                         border: OutlineInputBorder(
                           borderRadius:
                               BorderRadius.circular(AppBorderRadius.md),
@@ -229,10 +229,10 @@ class _AddTaskBottomSheetState extends State<AddTaskBottomSheet> {
                       ElevatedButton(
                         onPressed: _isTitleFilled ? _saveTask : null,
                         style: ElevatedButton.styleFrom(
-                          backgroundColor: AppColors.primary,
+                          backgroundColor: AppColors.primary(context),
                           foregroundColor: Colors.white,
-                          disabledBackgroundColor: AppColors.border,
-                          disabledForegroundColor: AppColors.textDisabled,
+                          disabledBackgroundColor: AppColors.border(context),
+                          disabledForegroundColor: AppColors.textDisabled(context),
                           padding: const EdgeInsets.symmetric(
                             horizontal: AppSpacing.xl,
                             vertical: AppSpacing.md,
@@ -277,10 +277,10 @@ class _AddTaskBottomSheetState extends State<AddTaskBottomSheet> {
           vertical: AppSpacing.sm,
         ),
         decoration: BoxDecoration(
-          color: isActive ? AppColors.primaryContainer : AppColors.surfaceVariant,
+          color: isActive ? AppColors.primaryContainer(context) : AppColors.surfaceVariant(context),
           borderRadius: BorderRadius.circular(AppBorderRadius.md),
           border: Border.all(
-            color: isActive ? AppColors.primary : Colors.transparent,
+            color: isActive ? AppColors.primary(context) : Colors.transparent,
             width: 1.5,
           ),
         ),
@@ -290,7 +290,7 @@ class _AddTaskBottomSheetState extends State<AddTaskBottomSheet> {
             Icon(
               icon,
               size: AppIconSizes.small,
-              color: isActive ? AppColors.primary : AppColors.iconInactive,
+              color: isActive ? AppColors.primary(context) : AppColors.iconInactive(context),
             ),
             const SizedBox(width: AppSpacing.xs),
             Text(
@@ -298,7 +298,7 @@ class _AddTaskBottomSheetState extends State<AddTaskBottomSheet> {
               style: TextStyle(
                 fontSize: AppFontSizes.small,
                 fontWeight: FontWeight.w600,
-                color: isActive ? AppColors.primary : AppColors.textSecondary,
+                color: isActive ? AppColors.primary(context) : AppColors.textSecondary(context),
               ),
             ),
           ],

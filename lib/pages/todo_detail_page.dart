@@ -23,13 +23,13 @@ class _TodoDetailPageState extends State<TodoDetailPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: AppColors.background,
+      backgroundColor: AppColors.background(context),
       appBar: AppBar(
-        backgroundColor: AppColors.surface,
+        backgroundColor: AppColors.surface(context),
         elevation: 0,
         leading: IconButton(
-          icon: const Icon(Icons.arrow_back_ios_new_rounded,
-              color: AppColors.textPrimary, size: AppIconSizes.small),
+          icon: Icon(Icons.arrow_back_ios_new_rounded,
+              color: AppColors.textPrimary(context), size: AppIconSizes.small),
           onPressed: () => Navigator.pop(context, _currentTodo.isFavorite),
         ),
         actions: [
@@ -40,8 +40,8 @@ class _TodoDetailPageState extends State<TodoDetailPage> {
                   ? Icons.star_rounded
                   : Icons.star_outline_rounded,
               color: _currentTodo.isFavorite
-                  ? AppColors.starYellow
-                  : AppColors.iconInactive,
+                  ? AppColors.starYellow(context)
+                  : AppColors.iconInactive(context),
               size: AppIconSizes.large,
             ),
           ),
@@ -50,7 +50,7 @@ class _TodoDetailPageState extends State<TodoDetailPage> {
         bottom: PreferredSize(
           preferredSize: const Size.fromHeight(1),
           child: Container(
-            color: AppColors.borderLight,
+            color: AppColors.borderLight(context),
             height: 1,
           ),
         ),
@@ -65,11 +65,11 @@ class _TodoDetailPageState extends State<TodoDetailPage> {
               width: double.infinity,
               padding: const EdgeInsets.all(AppSpacing.lg),
               decoration: BoxDecoration(
-                color: AppColors.surface,
+                color: AppColors.surface(context),
                 borderRadius: BorderRadius.circular(AppBorderRadius.md),
                 boxShadow: [
                   BoxShadow(
-                    color: AppColors.shadow,
+                    color: AppColors.shadow(context),
                     blurRadius: 4,
                     offset: const Offset(0, 2),
                   ),
@@ -85,8 +85,8 @@ class _TodoDetailPageState extends State<TodoDetailPage> {
                         height: AppFontSizes.xxLarge,
                         decoration: BoxDecoration(
                           color: _currentTodo.isFavorite
-                              ? AppColors.starYellow
-                              : AppColors.primary,
+                              ? AppColors.starYellow(context)
+                              : AppColors.primary(context),
                           borderRadius:
                               BorderRadius.circular(AppBorderRadius.sm),
                         ),
@@ -95,10 +95,10 @@ class _TodoDetailPageState extends State<TodoDetailPage> {
                       Expanded(
                         child: Text(
                           _currentTodo.title,
-                          style: const TextStyle(
+                          style: TextStyle(
                             fontSize: AppFontSizes.xxLarge,
                             fontWeight: FontWeight.bold,
-                            color: AppColors.textPrimary,
+                            color: AppColors.textPrimary(context),
                             height: 1.3,
                           ),
                         ),
@@ -118,11 +118,11 @@ class _TodoDetailPageState extends State<TodoDetailPage> {
                 width: double.infinity,
                 padding: const EdgeInsets.all(AppSpacing.lg),
                 decoration: BoxDecoration(
-                  color: AppColors.surface,
+                  color: AppColors.surface(context),
                   borderRadius: BorderRadius.circular(AppBorderRadius.md),
                   boxShadow: [
                     BoxShadow(
-                      color: AppColors.shadow,
+                      color: AppColors.shadow(context),
                       blurRadius: 4,
                       offset: const Offset(0, 2),
                     ),
@@ -136,15 +136,15 @@ class _TodoDetailPageState extends State<TodoDetailPage> {
                         Icon(
                           Icons.subject_rounded,
                           size: AppIconSizes.medium,
-                          color: AppColors.iconInactive,
+                          color: AppColors.iconInactive(context),
                         ),
                         const SizedBox(width: AppSpacing.sm),
-                        const Text(
+                        Text(
                           '세부 정보',
                           style: TextStyle(
                             fontSize: AppFontSizes.small,
                             fontWeight: FontWeight.w600,
-                            color: AppColors.textTertiary,
+                            color: AppColors.textTertiary(context),
                             letterSpacing: 0.5,
                           ),
                         ),
@@ -153,9 +153,9 @@ class _TodoDetailPageState extends State<TodoDetailPage> {
                     const SizedBox(height: AppSpacing.sm),
                     Text(
                       _currentTodo.description!,
-                      style: const TextStyle(
+                      style: TextStyle(
                         fontSize: AppFontSizes.medium,
-                        color: AppColors.textSecondary,
+                        color: AppColors.textSecondary(context),
                         height: 1.5,
                       ),
                     ),
@@ -170,11 +170,11 @@ class _TodoDetailPageState extends State<TodoDetailPage> {
               width: double.infinity,
               padding: const EdgeInsets.all(AppSpacing.lg),
               decoration: BoxDecoration(
-                color: AppColors.surface,
+                color: AppColors.surface(context),
                 borderRadius: BorderRadius.circular(AppBorderRadius.md),
                 boxShadow: [
                   BoxShadow(
-                    color: AppColors.shadow,
+                    color: AppColors.shadow(context),
                     blurRadius: 4,
                     offset: const Offset(0, 2),
                   ),
@@ -188,15 +188,15 @@ class _TodoDetailPageState extends State<TodoDetailPage> {
                       Icon(
                         Icons.info_outline_rounded,
                         size: AppIconSizes.medium,
-                        color: AppColors.iconInactive,
+                        color: AppColors.iconInactive(context),
                       ),
                       const SizedBox(width: AppSpacing.sm),
-                      const Text(
+                      Text(
                         '상태',
                         style: TextStyle(
                           fontSize: AppFontSizes.small,
                           fontWeight: FontWeight.w600,
-                          color: AppColors.textTertiary,
+                          color: AppColors.textTertiary(context),
                           letterSpacing: 0.5,
                         ),
                       ),
@@ -209,19 +209,19 @@ class _TodoDetailPageState extends State<TodoDetailPage> {
                         : Icons.radio_button_unchecked_rounded,
                     label: _currentTodo.isDone ? '완료됨' : '진행 중',
                     color: _currentTodo.isDone
-                        ? AppColors.success
-                        : AppColors.iconInactive,
+                        ? AppColors.success(context)
+                        : AppColors.iconInactive(context),
                     backgroundColor: _currentTodo.isDone
-                        ? AppColors.successLight
-                        : AppColors.surfaceVariant,
+                        ? AppColors.successLight(context)
+                        : AppColors.surfaceVariant(context),
                   ),
                   if (_currentTodo.isFavorite) ...[
                     const SizedBox(height: AppSpacing.sm),
                     _buildStatusChip(
                       icon: Icons.star_rounded,
                       label: '즐겨찾기',
-                      color: AppColors.starYellow,
-                      backgroundColor: AppColors.starYellowLight,
+                      color: AppColors.starYellow(context),
+                      backgroundColor: AppColors.starYellowLight(context),
                     ),
                   ],
                 ],

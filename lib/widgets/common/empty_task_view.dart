@@ -21,19 +21,19 @@ class EmptyTaskView extends StatelessWidget {
             Container(
               padding: const EdgeInsets.all(AppSpacing.xxl),
               decoration: BoxDecoration(
-                color: AppColors.primaryContainer.withAlpha((255 * 0.3).round()),
+                color: AppColors.primaryContainer(context).withAlpha((255 * 0.3).round()),
                 shape: BoxShape.circle,
               ),
               child: Container(
                 padding: const EdgeInsets.all(AppSpacing.xl),
-                decoration: const BoxDecoration(
-                  color: AppColors.primaryContainer,
+                decoration: BoxDecoration(
+                  color: AppColors.primaryContainer(context),
                   shape: BoxShape.circle,
                 ),
                 child: Icon(
                   Icons.task_alt_rounded,
                   size: AppIconSizes.xxLarge,
-                  color: AppColors.primary,
+                  color: AppColors.primary(context),
                 ),
               ),
             ),
@@ -41,12 +41,12 @@ class EmptyTaskView extends StatelessWidget {
             const SizedBox(height: AppSpacing.xxl),
 
             // Title
-            const Text(
+            Text(
               '아직 할 일이 없어요',
               style: TextStyle(
                 fontSize: AppFontSizes.xLarge,
                 fontWeight: FontWeight.bold,
-                color: AppColors.textPrimary,
+                color: AppColors.textPrimary(context),
               ),
             ),
 
@@ -56,9 +56,9 @@ class EmptyTaskView extends StatelessWidget {
             Text(
               "$ownerName님의 첫 할 일을 추가해보세요!\n아래 버튼을 눌러 시작할 수 있습니다.",
               textAlign: TextAlign.center,
-              style: const TextStyle(
+              style: TextStyle(
                 fontSize: AppFontSizes.medium,
-                color: AppColors.textTertiary,
+                color: AppColors.textTertiary(context),
                 height: 1.5,
               ),
             ),
@@ -69,10 +69,10 @@ class EmptyTaskView extends StatelessWidget {
             Container(
               padding: const EdgeInsets.all(AppSpacing.lg),
               decoration: BoxDecoration(
-                color: AppColors.surface,
+                color: AppColors.surface(context),
                 borderRadius: BorderRadius.circular(AppBorderRadius.md),
                 border: Border.all(
-                  color: AppColors.borderLight,
+                  color: AppColors.borderLight(context),
                   width: 1,
                 ),
               ),
@@ -83,15 +83,15 @@ class EmptyTaskView extends StatelessWidget {
                       Icon(
                         Icons.lightbulb_outline_rounded,
                         size: AppIconSizes.medium,
-                        color: AppColors.starYellow,
+                        color: AppColors.starYellow(context),
                       ),
                       const SizedBox(width: AppSpacing.sm),
-                      const Text(
+                      Text(
                         'TIP',
                         style: TextStyle(
                           fontSize: AppFontSizes.small,
                           fontWeight: FontWeight.bold,
-                          color: AppColors.textPrimary,
+                          color: AppColors.textPrimary(context),
                           letterSpacing: 1,
                         ),
                       ),
@@ -122,26 +122,30 @@ class EmptyTaskView extends StatelessWidget {
   }
 
   Widget _buildTipItem({required IconData icon, required String text}) {
-    return Row(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        Icon(
-          icon,
-          size: AppIconSizes.small,
-          color: AppColors.iconInactive,
-        ),
-        const SizedBox(width: AppSpacing.sm),
-        Expanded(
-          child: Text(
-            text,
-            style: const TextStyle(
-              fontSize: AppFontSizes.small,
-              color: AppColors.textSecondary,
-              height: 1.4,
+    return Builder(
+      builder: (context) {
+        return Row(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Icon(
+              icon,
+              size: AppIconSizes.small,
+              color: AppColors.iconInactive(context),
             ),
-          ),
-        ),
-      ],
+            const SizedBox(width: AppSpacing.sm),
+            Expanded(
+              child: Text(
+                text,
+                style: TextStyle(
+                  fontSize: AppFontSizes.small,
+                  color: AppColors.textSecondary(context),
+                  height: 1.4,
+                ),
+              ),
+            ),
+          ],
+        );
+      },
     );
   }
 }

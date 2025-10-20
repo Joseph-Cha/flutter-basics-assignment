@@ -10,7 +10,7 @@ class AddActionButton extends StatelessWidget {
   Widget build(BuildContext context) {
     return FloatingActionButton.extended(
       onPressed: onPressed,
-      backgroundColor: AppColors.accent,
+      backgroundColor: AppColors.accent(context),
       foregroundColor: Colors.white,
       elevation: AppElevation.high,
       icon: const Icon(
