@@ -11,43 +11,133 @@ class EmptyTaskView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
+    return Center(
+      child: Padding(
+        padding: const EdgeInsets.all(AppSpacing.xxl),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            // Illustration container
+            Container(
+              padding: const EdgeInsets.all(AppSpacing.xxl),
+              decoration: BoxDecoration(
+                color: AppColors.primaryContainer.withAlpha((255 * 0.3).round()),
+                shape: BoxShape.circle,
+              ),
+              child: Container(
+                padding: const EdgeInsets.all(AppSpacing.xl),
+                decoration: const BoxDecoration(
+                  color: AppColors.primaryContainer,
+                  shape: BoxShape.circle,
+                ),
+                child: Icon(
+                  Icons.task_alt_rounded,
+                  size: AppIconSizes.xxLarge,
+                  color: AppColors.primary,
+                ),
+              ),
+            ),
+
+            const SizedBox(height: AppSpacing.xxl),
+
+            // Title
+            const Text(
+              '아직 할 일이 없어요',
+              style: TextStyle(
+                fontSize: AppFontSizes.xLarge,
+                fontWeight: FontWeight.bold,
+                color: AppColors.textPrimary,
+              ),
+            ),
+
+            const SizedBox(height: AppSpacing.sm),
+
+            // Subtitle
+            Text(
+              "$ownerName님의 첫 할 일을 추가해보세요!\n아래 버튼을 눌러 시작할 수 있습니다.",
+              textAlign: TextAlign.center,
+              style: const TextStyle(
+                fontSize: AppFontSizes.medium,
+                color: AppColors.textTertiary,
+                height: 1.5,
+              ),
+            ),
+
+            const SizedBox(height: AppSpacing.xxl),
+
+            // Tips container
+            Container(
+              padding: const EdgeInsets.all(AppSpacing.lg),
+              decoration: BoxDecoration(
+                color: AppColors.surface,
+                borderRadius: BorderRadius.circular(AppBorderRadius.md),
+                border: Border.all(
+                  color: AppColors.borderLight,
+                  width: 1,
+                ),
+              ),
+              child: Column(
+                children: [
+                  Row(
+                    children: [
+                      Icon(
+                        Icons.lightbulb_outline_rounded,
+                        size: AppIconSizes.medium,
+                        color: AppColors.starYellow,
+                      ),
+                      const SizedBox(width: AppSpacing.sm),
+                      const Text(
+                        'TIP',
+                        style: TextStyle(
+                          fontSize: AppFontSizes.small,
+                          fontWeight: FontWeight.bold,
+                          color: AppColors.textPrimary,
+                          letterSpacing: 1,
+                        ),
+                      ),
+                    ],
+                  ),
+                  const SizedBox(height: AppSpacing.md),
+                  _buildTipItem(
+                    icon: Icons.star_outline_rounded,
+                    text: '중요한 할 일은 즐겨찾기로 표시하세요',
+                  ),
+                  const SizedBox(height: AppSpacing.sm),
+                  _buildTipItem(
+                    icon: Icons.check_circle_outline_rounded,
+                    text: '완료한 할 일은 체크박스를 눌러보세요',
+                  ),
+                  const SizedBox(height: AppSpacing.sm),
+                  _buildTipItem(
+                    icon: Icons.touch_app_rounded,
+                    text: '할 일을 탭하면 상세 정보를 볼 수 있어요',
+                  ),
+                ],
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+
+  Widget _buildTipItem({required IconData icon, required String text}) {
+    return Row(
+      crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Container(
-          width: double.infinity,
-          decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(AppBorderRadius.sm),
-            color: AppColors.containerBackground,
-          ),
-          child: Padding(
-            padding: const EdgeInsets.all(AppSpacing.lg),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: [
-                const Icon(
-                  Icons.note_add_outlined,
-                  size: AppIconSizes.large,
-                  color: AppColors.primaryAmber,
-                ),
-                const SizedBox(height: AppSpacing.xs),
-                const Text(
-                  '아직 할 일이 없음',
-                  style: TextStyle(
-                    fontSize: AppFontSizes.medium,
-                    color: AppColors.textHint,
-                    fontWeight: FontWeight.bold,
-                  ),
-                ),
-                const SizedBox(height: AppSpacing.xs),
-                Text(
-                  "할 일을 추가하고 $ownerName's Task에서\n할 일을 추적하세요.",
-                  textAlign: TextAlign.center,
-                  style: const TextStyle(
-                    fontSize: AppFontSizes.small,
-                    color: AppColors.textDisabled,
-                  ),
-                ),
-              ],
+        Icon(
+          icon,
+          size: AppIconSizes.small,
+          color: AppColors.iconInactive,
+        ),
+        const SizedBox(width: AppSpacing.sm),
+        Expanded(
+          child: Text(
+            text,
+            style: const TextStyle(
+              fontSize: AppFontSizes.small,
+              color: AppColors.textSecondary,
+              height: 1.4,
             ),
           ),
         ),

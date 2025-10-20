@@ -21,34 +21,40 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: AppColors.backgroundColor,
-      resizeToAvoidBottomInset: false,
+      backgroundColor: AppColors.background,
       appBar: AppBar(
-        backgroundColor: AppColors.appBarBackground,
+        backgroundColor: AppColors.surface,
+        elevation: 0,
         title: Text(
           "${widget.ownerName}'s Tasks",
           style: const TextStyle(
-            fontSize: AppFontSizes.large,
+            fontSize: AppFontSizes.xLarge,
             fontWeight: FontWeight.bold,
+            color: AppColors.textPrimary,
+          ),
+        ),
+        bottom: PreferredSize(
+          preferredSize: const Size.fromHeight(1),
+          child: Container(
+            color: AppColors.borderLight,
+            height: 1,
           ),
         ),
       ),
       body: SafeArea(
-        child: Padding(
-          padding: const EdgeInsets.all(AppSpacing.lg),
-          child: _todos.isEmpty
-              ? EmptyTaskView(ownerName: widget.ownerName)
-              : ListView.builder(
-                  itemCount: _todos.length,
-                  itemBuilder: (context, index) {
-                    return TodoView(
-                      todoEntity: _todos[index],
-                      onToggleDone: () => _toggleTodoDone(index),
-                      onToggleFavorite: () => _toggleTodoFavorite(index),
-                    );
-                  },
-                ),
-        ),
+        child: _todos.isEmpty
+            ? EmptyTaskView(ownerName: widget.ownerName)
+            : ListView.builder(
+                padding: const EdgeInsets.all(AppSpacing.md),
+                itemCount: _todos.length,
+                itemBuilder: (context, index) {
+                  return TodoView(
+                    todoEntity: _todos[index],
+                    onToggleDone: () => _toggleTodoDone(index),
+                    onToggleFavorite: () => _toggleTodoFavorite(index),
+                  );
+                },
+              ),
       ),
       floatingActionButton: AddActionButton(
         onPressed: _showAddTaskBottomSheet,

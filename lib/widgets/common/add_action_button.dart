@@ -8,28 +8,21 @@ class AddActionButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      decoration: const BoxDecoration(
-        boxShadow: [
-          BoxShadow(
-            color: AppColors.shadowColor,
-            spreadRadius: 2,
-            blurRadius: 7,
-            offset: Offset(-2, 4),
-          ),
-        ],
-        shape: BoxShape.circle,
-        color: AppColors.primaryRed,
+    return FloatingActionButton.extended(
+      onPressed: onPressed,
+      backgroundColor: AppColors.accent,
+      foregroundColor: Colors.white,
+      elevation: AppElevation.high,
+      icon: const Icon(
+        Icons.add_rounded,
+        size: AppIconSizes.medium,
       ),
-      child: Padding(
-        padding: const EdgeInsets.all(AppSpacing.sm),
-        child: GestureDetector(
-          onTap: onPressed,
-          child: const Icon(
-            Icons.add,
-            color: Colors.white,
-            size: AppIconSizes.small,
-          ),
+      label: const Text(
+        '할 일 추가',
+        style: TextStyle(
+          fontSize: AppFontSizes.medium,
+          fontWeight: FontWeight.bold,
+          letterSpacing: 0.5,
         ),
       ),
     );

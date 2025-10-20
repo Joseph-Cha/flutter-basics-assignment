@@ -17,48 +17,105 @@ class TodoView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final bool isFavorite = todoEntity.isFavorite;
+    final bool isDone = todoEntity.isDone;
+
     return GestureDetector(
       onTap: () => _navigateToDetail(context),
       child: Container(
-        padding: const EdgeInsets.symmetric(
-          vertical: AppSpacing.sm,
-          horizontal: AppSpacing.md,
-        ),
-        margin: const EdgeInsets.only(bottom: AppSpacing.sm),
+        margin: const EdgeInsets.only(bottom: AppSpacing.md),
         decoration: BoxDecoration(
+          color: isFavorite ? AppColors.favoriteBackground : AppColors.surface,
           borderRadius: BorderRadius.circular(AppBorderRadius.md),
-          color: AppColors.cardBackground,
-        ),
-        child: Row(
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: [
-            GestureDetector(
-              onTap: onToggleDone,
-              child: Icon(
-                todoEntity.isDone
-                    ? Icons.check_circle
-                    : Icons.radio_button_unchecked,
-              ),
-            ),
-            const SizedBox(width: AppSpacing.sm),
-            Expanded(
-              child: Text(
-                todoEntity.title,
-                style: TextStyle(
-                  decoration: todoEntity.isDone
-                      ? TextDecoration.lineThrough
-                      : TextDecoration.none,
-                  fontSize: AppFontSizes.medium,
-                ),
-              ),
-            ),
-            GestureDetector(
-              onTap: onToggleFavorite,
-              child: Icon(
-                todoEntity.isFavorite ? Icons.star : Icons.star_border,
-              ),
+          border: Border.all(
+            color: isFavorite ? AppColors.favoriteBorder : AppColors.borderLight,
+            width: 1.5,
+          ),
+          boxShadow: [
+            BoxShadow(
+              color: AppColors.shadow,
+              blurRadius: 4,
+              offset: const Offset(0, 2),
             ),
           ],
+        ),
+        child: Material(
+          color: Colors.transparent,
+          child: InkWell(
+            onTap: () => _navigateToDetail(context),
+            borderRadius: BorderRadius.circular(AppBorderRadius.md),
+            child: Padding(
+              padding: const EdgeInsets.symmetric(
+                vertical: AppSpacing.md,
+                horizontal: AppSpacing.md,
+              ),
+              child: Row(
+                children: [
+                  // Checkbox
+                  InkWell(
+                    onTap: onToggleDone,
+                    borderRadius: BorderRadius.circular(AppBorderRadius.round),
+                    child: Container(
+                      width: AppIconSizes.large,
+                      height: AppIconSizes.large,
+                      decoration: BoxDecoration(
+                        shape: BoxShape.circle,
+                        border: Border.all(
+                          color: isDone ? AppColors.success : AppColors.border,
+                          width: 2,
+                        ),
+                        color: isDone ? AppColors.success : Colors.transparent,
+                      ),
+                      child: isDone
+                          ? const Icon(
+                              Icons.check,
+                              size: AppIconSizes.small,
+                              color: Colors.white,
+                            )
+                          : null,
+                    ),
+                  ),
+                  const SizedBox(width: AppSpacing.md),
+
+                  // Title
+                  Expanded(
+                    child: Text(
+                      todoEntity.title,
+                      style: TextStyle(
+                        fontSize: AppFontSizes.medium,
+                        fontWeight: FontWeight.w500,
+                        color: isDone
+                            ? AppColors.textTertiary
+                            : AppColors.textPrimary,
+                        decoration: isDone
+                            ? TextDecoration.lineThrough
+                            : TextDecoration.none,
+                        decorationColor: AppColors.textTertiary,
+                        decorationThickness: 2,
+                      ),
+                    ),
+                  ),
+                  const SizedBox(width: AppSpacing.sm),
+
+                  // Favorite button
+                  InkWell(
+                    onTap: onToggleFavorite,
+                    borderRadius: BorderRadius.circular(AppBorderRadius.round),
+                    child: Padding(
+                      padding: const EdgeInsets.all(AppSpacing.xs),
+                      child: Icon(
+                        isFavorite ? Icons.star_rounded : Icons.star_outline_rounded,
+                        size: AppIconSizes.medium,
+                        color: isFavorite
+                            ? AppColors.starYellow
+                            : AppColors.iconInactive,
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          ),
         ),
       ),
     );

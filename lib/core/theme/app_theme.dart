@@ -8,14 +8,40 @@ class AppTheme {
   static ThemeData get lightTheme {
     return ThemeData(
       fontFamily: 'Noto_Sans_KR',
-      scaffoldBackgroundColor: AppColors.backgroundColor,
-      appBarTheme: AppBarTheme(
-        backgroundColor: AppColors.appBarBackground,
+      useMaterial3: true,
+      colorScheme: ColorScheme.light(
+        primary: AppColors.primary,
+        secondary: AppColors.secondary,
+        surface: AppColors.surface,
+      ),
+      scaffoldBackgroundColor: AppColors.background,
+      appBarTheme: const AppBarTheme(
+        backgroundColor: AppColors.surface,
         foregroundColor: AppColors.textPrimary,
         elevation: 0,
+        centerTitle: false,
+        titleTextStyle: TextStyle(
+          color: AppColors.textPrimary,
+          fontSize: AppFontSizes.xLarge,
+          fontWeight: FontWeight.bold,
+          fontFamily: 'Noto_Sans_KR',
+        ),
       ),
       iconTheme: const IconThemeData(
-        color: AppColors.iconPrimary,
+        color: AppColors.iconInactive,
+        size: AppIconSizes.medium,
+      ),
+      cardTheme: CardThemeData(
+        color: AppColors.surface,
+        elevation: AppElevation.low,
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(AppBorderRadius.md),
+        ),
+      ),
+      floatingActionButtonTheme: const FloatingActionButtonThemeData(
+        backgroundColor: AppColors.accent,
+        foregroundColor: Colors.white,
+        elevation: AppElevation.high,
       ),
     );
   }
