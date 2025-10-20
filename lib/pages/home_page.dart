@@ -52,6 +52,7 @@ class _HomePageState extends State<HomePage> {
                     todoEntity: _todos[index],
                     onToggleDone: () => _toggleTodoDone(index),
                     onToggleFavorite: () => _toggleTodoFavorite(index),
+                    onDelete: () => _deleteTodo(index),
                   );
                 },
               ),
@@ -82,6 +83,40 @@ class _HomePageState extends State<HomePage> {
         isFavorite: !_todos[index].isFavorite,
       );
     });
+  }
+
+  void _deleteTodo(int index) {
+    final deletedTodo = _todos[index];
+    final deletedIndex = index;
+
+    setState(() {
+      _todos.removeAt(index);
+    });
+
+    // Show snackbar with undo option
+    ScaffoldMessenger.of(context).clearSnackBars();
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(
+        content: Text(
+          '"${deletedTodo.title}" 삭제됨',
+          style: const TextStyle(fontSize: AppFontSizes.medium),
+        ),
+        action: SnackBarAction(
+          label: '실행 취소',
+          textColor: AppColors.lightPrimary,
+          onPressed: () {
+            setState(() {
+              _todos.insert(deletedIndex, deletedTodo);
+            });
+          },
+        ),
+        duration: const Duration(seconds: 4),
+        behavior: SnackBarBehavior.floating,
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(AppBorderRadius.md),
+        ),
+      ),
+    );
   }
 
   void _showAddTaskBottomSheet() {
