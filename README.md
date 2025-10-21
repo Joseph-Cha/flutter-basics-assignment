@@ -4,6 +4,33 @@
 
 Flutter로 구현한 기능이 완전한 Todo 앱입니다. Material Design 3를 기반으로 한 아름다운 UI와 라이트/다크 테마 자동 전환을 지원합니다.
 
+## 📱 앱 데모
+
+<div align="center">
+
+### 🎬 실제 동작 화면
+
+<table>
+  <tr>
+    <td align="center">
+      <img src="./resources/screen_record_light_theme.gif" alt="라이트 테마" width="280"/>
+      <br/>
+      <sub><b>☀️ 라이트 테마</b></sub>
+    </td>
+    <td align="center">
+      <img src="./resources/screen_record_dark_theme.gif" alt="다크 테마" width="280"/>
+      <br/>
+      <sub><b>🌙 다크 테마</b></sub>
+    </td>
+  </tr>
+</table>
+
+*할 일 추가/삭제, 즐겨찾기, 스와이프 삭제 등 모든 기능을 확인하세요*
+
+---
+
+</div>
+
 ## ✨ 주요 기능
 
 ### 핵심 기능
